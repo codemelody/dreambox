@@ -51,11 +51,7 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
-		<!-- 3rd -->
-		<dependency>
-			<groupId>nl.capthca</groupId>
-			<artifactId>simplecaptcha</artifactId>
-		</dependency>
+
 		<!-- json -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

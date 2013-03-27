@@ -411,27 +411,6 @@
 				<version>${quartz.version}</version>
 			</dependency>
 
-			<!-- memcached begin -->
-			<dependency>
-				<groupId>spy</groupId>
-				<artifactId>memcached</artifactId>
-				<version>2.5</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.danga</groupId>
-				<artifactId>Memcached-Java-Client</artifactId>
-				<version>2.6.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.thimbleware.jmemcached</groupId>
-				<artifactId>jmemcached-core</artifactId>
-				<version>0.8</version>
-				<scope>test</scope>
-			</dependency>
-			<!-- memcached end -->
-
 			<!-- logging begin -->
 			<!-- slf4j -->
 			<dependency>
@@ -572,6 +551,11 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpmime</artifactId>
 				<version>4.0.1</version>
 			</dependency>
 			<dependency>
@@ -774,13 +758,6 @@
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>1.0.0.GA</version>
-			</dependency>
-
-			<!-- 3rd -->
-			<dependency>
-				<groupId>nl.capthca</groupId>
-				<artifactId>simplecaptcha</artifactId>
-				<version>1.1.1</version>
 			</dependency>
 
 			<!-- Axis Web Service -->

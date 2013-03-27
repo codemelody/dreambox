@@ -17,7 +17,7 @@
 			<groupId>dreambox</groupId>
 			<artifactId>dreambox-config</artifactId>
 		</dependency>
-	
+
 		<!-- j2ee api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -101,7 +101,7 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -112,10 +112,6 @@
 		</dependency>
 
 		<!-- 3rd -->
-		<dependency>
-			<groupId>nl.capthca</groupId>
-			<artifactId>simplecaptcha</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -132,15 +128,6 @@
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.danga</groupId>
-			<artifactId>Memcached-Java-Client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.0</version>
-		</dependency>
 
 		<!-- test -->
 		<dependency>
@@ -155,8 +142,23 @@
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>dreambox-common</finalName>
