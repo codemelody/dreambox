@@ -36,7 +36,7 @@ public class ThreadSafeHttpClient {
     /**
      * 超时时间
      */
-    private static final int TIME_OUT = 2000;
+    private static final int TIME_OUT = 20000;
     
     /**
      * 默认字符集为UTF-8。

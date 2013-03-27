@@ -102,6 +102,7 @@ public class KuaiPanOAuth {
             oauth.setSignatureMethod(KuaiPanGlobal.SIGNATURE_METHOD);
             oauth.setTimestamp(System.currentTimeMillis());
             oauth.setVersion(KuaiPanGlobal.VERSION);
+            //oauth.setCallback("http://183.129.150.170:8080/dreambox-web/go.do");
             String url = gererateRequestUrl(oauth);
             System.out.println(url);
             String res = ThreadSafeHttpClient.get(url);
@@ -112,12 +113,14 @@ public class KuaiPanOAuth {
             return null;
         }
     }
-    public static void authorize(RequestTokenRes param){
+    public static String authorize(RequestTokenRes param){
         try {
             String res = ThreadSafeHttpClient.get(KuaiPanGlobal.AUTHORIZE_URL + param.getOauthToken());
             System.out.println(res);
+            return res;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
     

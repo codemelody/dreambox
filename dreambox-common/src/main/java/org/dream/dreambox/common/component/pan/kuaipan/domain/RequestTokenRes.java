@@ -4,6 +4,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class RequestTokenRes {
 
+    private String msg;
+    
+    @JsonProperty(value="basestring")
+    private String baseString;
+    
     /** oauth_token Y   string  未授权的token */
     @JsonProperty(value="oauth_token")
     private String oauthToken;
@@ -16,6 +21,18 @@ public class RequestTokenRes {
     @JsonProperty(value="oauth_callback_confirmed")
     private String oauthCallbackConfirmed;
     
+    public String getMsg() {
+        return msg;
+    }
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    public String getBaseString() {
+        return baseString;
+    }
+    public void setBaseString(String baseString) {
+        this.baseString = baseString;
+    }
     public String getOauthToken() {
         return oauthToken;
     }
