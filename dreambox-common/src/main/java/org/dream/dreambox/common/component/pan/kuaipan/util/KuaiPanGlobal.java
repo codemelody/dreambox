@@ -2,10 +2,7 @@ package org.dream.dreambox.common.component.pan.kuaipan.util;
 
 
 /**
- * ��ɽ����API��URL��
- * @author </a href="mailto:dingjun@llyuntong.com.cn">dingjun</a>
- * @version $Id: KuaiPanURL.java, v 0.1 2013-2-21 ����10:50:02 Administrator Exp $ 
- * @since 1.0
+ * 金山快盘API的全局参数和请求URL。
  */
 public class KuaiPanGlobal {
 

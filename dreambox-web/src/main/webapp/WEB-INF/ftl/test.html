@@ -1,4 +1,20 @@
-test!!!
-${oauth_token!}
-${oauth_verifier!}
-${msg!}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<a target="_blank" href="${url!}">授权</a>
+<form action="auth.do" method="post">
+	验证码:<input type="text" value="输入验证码" name="verifer" />
+	<input type="hidden" value="${token!}" name="token" />
+	<input type="hidden" value="${secret!}" name="secret" />
+	<input type="submit" value="确定" />
+</form>
+<form action="upload.do" method="post">
+	<input type="hidden" value="${token!}" name="token" />
+	<input type="hidden" value="${secret!}" name="secret" />
+	<input type="submit" value="确定" />
+</form>
+</body>
+</html>
