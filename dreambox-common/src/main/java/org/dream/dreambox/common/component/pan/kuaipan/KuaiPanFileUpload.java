@@ -13,8 +13,8 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AuthEntity;
-import org.dream.dreambox.common.component.pan.kuaipan.domain.RequestTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadFileEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadLocateRes;
 import org.dream.dreambox.common.component.pan.kuaipan.util.JsonUtil;
@@ -26,7 +26,7 @@ import sun.misc.BASE64Encoder;
 
 public class KuaiPanFileUpload {
 
-    public static void uploadFile(File file, RequestTokenRes res, String uploadUrl) {
+    public void uploadFile(File file, AccessTokenRes res, String uploadUrl) {
         try {
             UploadFileEntity upload = new UploadFileEntity();
             AuthEntity oauth = new AuthEntity();
@@ -64,7 +64,7 @@ public class KuaiPanFileUpload {
         }
     }
 
-    private static String generateUploadFileRequestURL(UploadFileEntity upload, String uploadUrl, String secret) {
+    private String generateUploadFileRequestURL(UploadFileEntity upload, String uploadUrl, String secret) {
         StringBuffer url = new StringBuffer(uploadUrl + KuaiPanGlobal.UPLOAD_FILE_SUFFIX_URL + "?");
         url.append("oauth_signature=").append(getUploadFileSignature(upload, uploadUrl, secret));
         url.append("&oauth_consumer_key=").append(upload.getAuth().getConsumerKey());
@@ -80,7 +80,7 @@ public class KuaiPanFileUpload {
         return url.toString();
     }
 
-    private static String getUploadFileSignature(UploadFileEntity upload, String uploadUrl, String tokenSecret) {
+    private String getUploadFileSignature(UploadFileEntity upload, String uploadUrl, String tokenSecret) {
         String baseUrl = gererateUploadFileBaseUrl(upload, uploadUrl);
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + tokenSecret;
         String base64 = new BASE64Encoder().encode(KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(),
@@ -88,7 +88,7 @@ public class KuaiPanFileUpload {
         return base64;
     }
 
-    private static String gererateUploadFileBaseUrl(UploadFileEntity upload, String uploadUrl) {
+    private String gererateUploadFileBaseUrl(UploadFileEntity upload, String uploadUrl) {
         StringBuffer url = new StringBuffer(
             "POST&" + KuaiPanUtil.encodeUrl(uploadUrl + KuaiPanGlobal.UPLOAD_FILE_SUFFIX_URL) + "&");
         StringBuffer params = new StringBuffer();
@@ -104,7 +104,7 @@ public class KuaiPanFileUpload {
         return url.append(KuaiPanUtil.encodeUrl(params.toString())).toString();
     }
 
-    public static UploadLocateRes uploadLocate(RequestTokenRes param) {
+    public UploadLocateRes uploadLocate(AccessTokenRes param) {
         try {
             UploadFileEntity upload = new UploadFileEntity();
             AuthEntity oauth = new AuthEntity();
@@ -126,7 +126,7 @@ public class KuaiPanFileUpload {
         }
     }
 
-    private static String generateUploadLocateRequestURL(UploadFileEntity upload, String secret) {
+    private String generateUploadLocateRequestURL(UploadFileEntity upload, String secret) {
         StringBuffer url = new StringBuffer(KuaiPanGlobal.UPLOAD_LOCATE_URL + "?");
         url.append("oauth_consumer_key=").append(upload.getAuth().getConsumerKey());
         url.append("&oauth_token=").append(upload.getAuth().getToken());
@@ -142,7 +142,7 @@ public class KuaiPanFileUpload {
         return url.toString();
     }
 
-    private static String getUploadLocateSignature(UploadFileEntity upload, String tokenSecret) {
+    private String getUploadLocateSignature(UploadFileEntity upload, String tokenSecret) {
         String baseUrl = gererateUploadLocateBaseUrl(upload);
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + tokenSecret;
         String base64 = new BASE64Encoder().encode(KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(),
@@ -150,7 +150,7 @@ public class KuaiPanFileUpload {
         return base64;
     }
 
-    private static String gererateUploadLocateBaseUrl(UploadFileEntity upload) {
+    private String gererateUploadLocateBaseUrl(UploadFileEntity upload) {
         StringBuffer url = new StringBuffer(
             "GET&" + KuaiPanUtil.encodeUrl(KuaiPanGlobal.UPLOAD_LOCATE_URL) + "&");
         StringBuffer params = new StringBuffer();

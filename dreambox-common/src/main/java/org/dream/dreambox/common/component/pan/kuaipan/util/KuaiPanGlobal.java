@@ -19,4 +19,6 @@ public class KuaiPanGlobal {
     public static final String UPLOAD_LOCATE_URL      = "http://api-content.dfs.kuaipan.cn/1/fileops/upload_locate";
     public static final String UPLOAD_FILE_SUFFIX_URL = "1/fileops/upload_file";
     
+    public static final String METADATA_URL = "http://openapi.kuaipan.cn/1/metadata/";
+    
 }

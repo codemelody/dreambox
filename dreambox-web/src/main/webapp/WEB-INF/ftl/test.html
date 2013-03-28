@@ -4,17 +4,33 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
+Option 1: requestToken<br/>
 <a target="_blank" href="${url!}">授权</a>
+<br/>
+
+Option 2: accessToken<br/>
 <form action="auth.do" method="post">
 	验证码:<input type="text" value="输入验证码" name="verifer" />
 	<input type="hidden" value="${token!}" name="token" />
 	<input type="hidden" value="${secret!}" name="secret" />
 	<input type="submit" value="确定" />
 </form>
+<br/>
+
+Option 3: upload<br/>
 <form action="upload.do" method="post">
+	<input type="hidden" value="${token!}" name="token" />
+	<input type="hidden" value="${secret!}" name="secret" />
+	<input type="submit" value="上传" />
+</form>
+<br/>
+
+Option 4: metadata<br/>
+<form action="metadata.do" method="post">
 	<input type="hidden" value="${token!}" name="token" />
 	<input type="hidden" value="${secret!}" name="secret" />
 	<input type="submit" value="确定" />
 </form>
+
 </body>
 </html>

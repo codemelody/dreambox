@@ -3,6 +3,7 @@ package org.dream.dreambox.web.controller;
 import java.io.File;
 
 import org.dream.dreambox.common.base.BaseController;
+import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanFileInfo;
 import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanFileUpload;
 import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanOAuth;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
@@ -33,7 +34,8 @@ public class TestController extends BaseController {
         RequestTokenRes r = new RequestTokenRes();
         r.setOauthToken(token);
         r.setOauthTokenSecret(secret);
-        AccessTokenRes a = KuaiPanOAuth.accessToken(r, verifer);
+        KuaiPanOAuth service = new KuaiPanOAuth();
+        AccessTokenRes a = service.accessToken(r, verifer);
         mav.addObject("token", a.getOauthToken());
         mav.addObject("secret", a.getOauthTokenSecret());
         mav.setViewName("test");
@@ -43,11 +45,26 @@ public class TestController extends BaseController {
     @RequestMapping(value="upload")
     public ModelAndView upload(String secret, String token){
         ModelAndView mav = new ModelAndView();
-        RequestTokenRes r1 = new RequestTokenRes();
+        AccessTokenRes r1 = new AccessTokenRes();
         r1.setOauthToken(token);
         r1.setOauthTokenSecret(secret);
-        UploadLocateRes r = KuaiPanFileUpload.uploadLocate(r1);
-        KuaiPanFileUpload.uploadFile(new File("f:/a.txt"), r1, r.getUrl());
+        KuaiPanFileUpload service = new KuaiPanFileUpload();
+        UploadLocateRes r = service.uploadLocate(r1);
+        service.uploadFile(new File("f:/a.txt"), r1, r.getUrl());
+        mav.addObject("token", r1.getOauthToken());
+        mav.addObject("secret", r1.getOauthTokenSecret());
+        mav.setViewName("test");
+        return mav;
+    }
+    
+    @RequestMapping(value="metadata")
+    public ModelAndView metadata(String secret, String token){
+        ModelAndView mav = new ModelAndView();
+        KuaiPanFileInfo service = new KuaiPanFileInfo();
+        AccessTokenRes r1 = new AccessTokenRes();
+        r1.setOauthToken(token);
+        r1.setOauthTokenSecret(secret);
+        service.getMetadata(r1);
         mav.setViewName("test");
         return mav;
     }

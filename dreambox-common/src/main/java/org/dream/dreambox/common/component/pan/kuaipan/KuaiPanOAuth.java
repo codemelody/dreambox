@@ -123,7 +123,7 @@ public class KuaiPanOAuth {
      * @param verifer 验证码
      * @return 包含已经授权的token的AccessTokenRes对象
      */
-    public static AccessTokenRes accessToken(RequestTokenRes param, String verifer){
+    public AccessTokenRes accessToken(RequestTokenRes param, String verifer){
         try{
             AuthEntity oauth = new AuthEntity();
             oauth.setConsumerKey(KuaiPanGlobal.CONSUMER_KEY);
@@ -149,7 +149,7 @@ public class KuaiPanOAuth {
      * @param verifier 验证码。
      * @return
      */
-    private static String generateAccessTokenRequestUrl(AuthEntity oauth, String tokenSecret, String verifier){
+    private String generateAccessTokenRequestUrl(AuthEntity oauth, String tokenSecret, String verifier){
         try{
             if(StringUtils.isEmpty(oauth.getConsumerKey()) || oauth.getTimestamp() == null 
                     || oauth.getTimestamp() == 0 || StringUtils.isEmpty(oauth.getNonce()) 
@@ -180,7 +180,7 @@ public class KuaiPanOAuth {
      * @param verifier
      * @return
      */
-    private static String generateAccessTokenSignature(AuthEntity oauth, String tokenSecret, String verifier){
+    private String generateAccessTokenSignature(AuthEntity oauth, String tokenSecret, String verifier){
         String baseUrl = generateAccessTokenBaseUrl(oauth, verifier);
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + tokenSecret;
         System.out.println(secret);
@@ -195,7 +195,7 @@ public class KuaiPanOAuth {
      * @param verifier
      * @return
      */
-    private static String generateAccessTokenBaseUrl(AuthEntity oauth, String verifier){
+    private String generateAccessTokenBaseUrl(AuthEntity oauth, String verifier){
         try{
             if(StringUtils.isEmpty(oauth.getConsumerKey()) || oauth.getTimestamp() == null 
                     || oauth.getTimestamp() == 0 || StringUtils.isEmpty(oauth.getNonce()) 
@@ -221,7 +221,7 @@ public class KuaiPanOAuth {
     }
     
     public static void main(String[] args) throws Exception {
-        authorize(requestToken());
+        //authorize(requestToken());
     }
 
 }
