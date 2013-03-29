@@ -6,6 +6,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class FileInfoRes {
 
+    private String msg;
+    
+    private String basestring;
+    
     private List<FileInfo> files;
     
     private String path;
@@ -31,6 +35,22 @@ public class FileInfoRes {
     
     @JsonProperty(value="is_deleted")
     private String isDeleted;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getBasestring() {
+        return basestring;
+    }
+
+    public void setBasestring(String basestring) {
+        this.basestring = basestring;
+    }
 
     public List<FileInfo> getFiles() {
         return files;

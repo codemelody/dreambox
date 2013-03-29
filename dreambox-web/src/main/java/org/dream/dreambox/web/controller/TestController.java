@@ -65,6 +65,8 @@ public class TestController extends BaseController {
         r1.setOauthToken(token);
         r1.setOauthTokenSecret(secret);
         service.getMetadata(r1);
+        mav.addObject("token", r1.getOauthToken());
+        mav.addObject("secret", r1.getOauthTokenSecret());
         mav.setViewName("test");
         return mav;
     }

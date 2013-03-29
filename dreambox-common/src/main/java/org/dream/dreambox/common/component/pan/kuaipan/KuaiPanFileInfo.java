@@ -36,12 +36,12 @@ public class KuaiPanFileInfo {
 
     private String generateFileInfoRequestURL(FileInfoEntity info, String oauthTokenSecret) {
         StringBuffer url = new StringBuffer(KuaiPanGlobal.METADATA_URL + KuaiPanGlobal.ROOT + "?");
-        url.append("oauth_consumer_key=").append(info.getAuth().getConsumerKey());
-        url.append("&oauth_token=").append(info.getAuth().getToken());
-        url.append("&oauth_signature_method=").append(info.getAuth().getSignatureMethod());
-        url.append("&oauth_signature=").append(getMetadataSignature(info, oauthTokenSecret));
-        url.append("&oauth_timestamp=").append(info.getAuth().getTimestamp().toString().substring(0, 10));
+        url.append("oauth_signature=").append(getMetadataSignature(info, oauthTokenSecret));
+        url.append("&oauth_consumer_key=").append(info.getAuth().getConsumerKey());
         url.append("&oauth_nonce=").append(info.getAuth().getNonce());
+        url.append("&oauth_signature_method=").append(info.getAuth().getSignatureMethod());
+        url.append("&oauth_timestamp=").append(info.getAuth().getTimestamp().toString().substring(0, 10));
+        url.append("&oauth_token=").append(info.getAuth().getToken());
         url.append("&oauth_version=").append(info.getAuth().getVersion());
         return url.toString();
     }
@@ -55,13 +55,13 @@ public class KuaiPanFileInfo {
     }
 
     private String gererateFileInfoBaseUrl(FileInfoEntity info) {
-        StringBuffer url = new StringBuffer("GET&" + KuaiPanUtil.encodeUrl(KuaiPanGlobal.METADATA_URL + KuaiPanGlobal.ROOT + "&"));
+        StringBuffer url = new StringBuffer("GET&" + KuaiPanUtil.encodeUrl(KuaiPanGlobal.METADATA_URL + KuaiPanGlobal.ROOT) + "&");
         StringBuffer params = new StringBuffer();
         params.append("oauth_consumer_key=").append(info.getAuth().getConsumerKey());
-        params.append("&oauth_token").append(info.getAuth().getToken());
+        params.append("&oauth_nonce=").append(info.getAuth().getNonce());
         params.append("&oauth_signature_method=").append(info.getAuth().getSignatureMethod());
         params.append("&oauth_timestamp=").append(info.getAuth().getTimestamp().toString().substring(0, 10));
-        params.append("&oauth_nonce=").append(info.getAuth().getNonce());
+        params.append("&oauth_token").append(info.getAuth().getToken());
         params.append("&oauth_version=").append(info.getAuth().getVersion());
         return url.append(KuaiPanUtil.encodeUrl(params.toString())).toString();
     }
