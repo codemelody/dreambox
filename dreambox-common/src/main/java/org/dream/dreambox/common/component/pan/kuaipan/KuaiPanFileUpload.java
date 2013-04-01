@@ -17,9 +17,9 @@ import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AuthEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadFileEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadLocateRes;
-import org.dream.dreambox.common.component.pan.kuaipan.util.JsonUtil;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanGlobal;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanUtil;
+import org.dream.dreambox.common.util.JsonUtil;
 import org.dream.dreambox.common.util.ThreadSafeHttpClient;
 
 import sun.misc.BASE64Encoder;
@@ -85,7 +85,7 @@ public class KuaiPanFileUpload {
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + tokenSecret;
         String base64 = new BASE64Encoder().encode(KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(),
             secret.getBytes()));
-        return base64;
+        return KuaiPanUtil.encodeUrl(base64);
     }
 
     private String gererateUploadFileBaseUrl(UploadFileEntity upload, String uploadUrl) {
@@ -147,7 +147,7 @@ public class KuaiPanFileUpload {
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + tokenSecret;
         String base64 = new BASE64Encoder().encode(KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(),
             secret.getBytes()));
-        return base64;
+        return KuaiPanUtil.encodeUrl(base64);
     }
 
     private String gererateUploadLocateBaseUrl(UploadFileEntity upload) {

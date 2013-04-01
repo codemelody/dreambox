@@ -23,6 +23,27 @@ public class FileInfo {
     
     @JsonProperty(value="is_deleted")
     private String isDeleted;
+    
+    private String sha1;
+    
+    @JsonProperty(value="share_id")
+    private String shareId;
+
+    public String getSha1() {
+        return sha1;
+    }
+
+    public void setSha1(String sha1) {
+        this.sha1 = sha1;
+    }
+
+    public String getShareId() {
+        return shareId;
+    }
+
+    public void setShareId(String shareId) {
+        this.shareId = shareId;
+    }
 
     public String getFileId() {
         return fileId;

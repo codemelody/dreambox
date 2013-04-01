@@ -12,6 +12,8 @@ public class FileInfoRes {
     
     private List<FileInfo> files;
     
+    private String size;
+    
     private String path;
     
     private String root;
@@ -35,6 +37,14 @@ public class FileInfoRes {
     
     @JsonProperty(value="is_deleted")
     private String isDeleted;
+    
+    private String sha1;
+    
+    @JsonProperty(value="share_id")
+    private String shareId;
+    
+    @JsonProperty(value="files_total")
+    private String filesTotal;
 
     public String getMsg() {
         return msg;
@@ -138,6 +148,38 @@ public class FileInfoRes {
 
     public void setIsDeleted(String isDeleted) {
         this.isDeleted = isDeleted;
+    }
+    
+    public String getSha1() {
+        return sha1;
+    }
+
+    public void setSha1(String sha1) {
+        this.sha1 = sha1;
+    }
+
+    public String getShareId() {
+        return shareId;
+    }
+
+    public void setShareId(String shareId) {
+        this.shareId = shareId;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getFilesTotal() {
+        return filesTotal;
+    }
+
+    public void setFilesTotal(String filesTotal) {
+        this.filesTotal = filesTotal;
     }
     
 }

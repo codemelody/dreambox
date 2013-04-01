@@ -116,6 +116,7 @@ public class ThreadSafeHttpClient {
         /*if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
             throw new RuntimeException("请求失败");
         }*/
+        System.out.println(response.getStatusLine().getStatusCode());
         HttpEntity resEntity = response.getEntity();
         return (resEntity == null) ? "" : EntityUtils.toString(resEntity, CHARSET);
     }

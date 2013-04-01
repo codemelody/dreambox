@@ -1,4 +1,4 @@
-package org.dream.dreambox.common.component.pan.kuaipan.util;
+package org.dream.dreambox.common.util;
 
 import org.codehaus.jackson.map.ObjectMapper;
 

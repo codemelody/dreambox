@@ -4,9 +4,9 @@ import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AuthEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.FileInfoEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.FileInfoRes;
-import org.dream.dreambox.common.component.pan.kuaipan.util.JsonUtil;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanGlobal;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanUtil;
+import org.dream.dreambox.common.util.JsonUtil;
 import org.dream.dreambox.common.util.ThreadSafeHttpClient;
 
 import sun.misc.BASE64Encoder;
@@ -15,16 +15,21 @@ public class KuaiPanFileInfo {
 
     public FileInfoRes getMetadata(AccessTokenRes accessToken){
         try{
+            //accessToken.setOauthToken("01aafbd751041a3ac82ee54e");
+            //accessToken.setOauthTokenSecret("3602f9ffa61c47e98736d96c3b8e89aa");
             FileInfoEntity info = new FileInfoEntity();
             AuthEntity oauth = new AuthEntity();
             oauth.setConsumerKey(KuaiPanGlobal.CONSUMER_KEY);
             oauth.setNonce(KuaiPanUtil.getRandomNonce(8));
+            //oauth.setNonce("Z38a9zEy");
             oauth.setSignatureMethod(KuaiPanGlobal.SIGNATURE_METHOD);
             oauth.setTimestamp(System.currentTimeMillis());
+            //oauth.setTimestamp(1364783424L);
             oauth.setVersion(KuaiPanGlobal.VERSION);
             oauth.setToken(accessToken.getOauthToken());
             info.setAuth(oauth);
             String url = generateFileInfoRequestURL(info, accessToken.getOauthTokenSecret());
+            System.out.println(url);
             String json = ThreadSafeHttpClient.get(url);
             System.out.println(json);
             return JsonUtil.parseJson2Object(json, FileInfoRes.class);
@@ -49,9 +54,10 @@ public class KuaiPanFileInfo {
     private String getMetadataSignature(FileInfoEntity info, String oauthTokenSecret) {
         String baseUrl = gererateFileInfoBaseUrl(info);
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&" + oauthTokenSecret;
+        System.out.println(secret);
         String base64 = new BASE64Encoder().encode(KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(),
             secret.getBytes()));
-        return base64;
+        return KuaiPanUtil.encodeUrl(base64);
     }
 
     private String gererateFileInfoBaseUrl(FileInfoEntity info) {
@@ -61,7 +67,7 @@ public class KuaiPanFileInfo {
         params.append("&oauth_nonce=").append(info.getAuth().getNonce());
         params.append("&oauth_signature_method=").append(info.getAuth().getSignatureMethod());
         params.append("&oauth_timestamp=").append(info.getAuth().getTimestamp().toString().substring(0, 10));
-        params.append("&oauth_token").append(info.getAuth().getToken());
+        params.append("&oauth_token=").append(info.getAuth().getToken());
         params.append("&oauth_version=").append(info.getAuth().getVersion());
         return url.append(KuaiPanUtil.encodeUrl(params.toString())).toString();
     }

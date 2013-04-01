@@ -2,7 +2,6 @@ package org.dream.dreambox.common.component.pan.kuaipan.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.Key;
 import java.util.Random;
 
 import javax.crypto.Mac;
@@ -49,7 +48,7 @@ public class KuaiPanUtil {
     public static byte[] encodeHmacSHA(byte[] data, byte[] key) {
         try {
             String method = "HmacSHA1";
-            Key k = new SecretKeySpec(key, method);
+            SecretKeySpec k = new SecretKeySpec(key, method);
             Mac mac = Mac.getInstance(method);
             mac.init(k);
             return mac.doFinal(data);

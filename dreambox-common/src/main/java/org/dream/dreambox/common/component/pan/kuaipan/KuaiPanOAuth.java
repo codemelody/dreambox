@@ -4,9 +4,9 @@ import org.apache.commons.lang.StringUtils;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AuthEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.RequestTokenRes;
-import org.dream.dreambox.common.component.pan.kuaipan.util.JsonUtil;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanGlobal;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanUtil;
+import org.dream.dreambox.common.util.JsonUtil;
 import org.dream.dreambox.common.util.ThreadSafeHttpClient;
 
 import sun.misc.BASE64Encoder;
@@ -53,7 +53,7 @@ public class KuaiPanOAuth {
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&";
         String base64 = new BASE64Encoder().encode(
             KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(), secret.getBytes()));
-        return base64;
+        return KuaiPanUtil.encodeUrl(base64);
     }
 
     /**
@@ -186,7 +186,7 @@ public class KuaiPanOAuth {
         System.out.println(secret);
         String base64 = new BASE64Encoder().encode(
             KuaiPanUtil.encodeHmacSHA(baseUrl.getBytes(), secret.getBytes()));
-        return base64;
+        return KuaiPanUtil.encodeUrl(base64);
     }
     
     /**
