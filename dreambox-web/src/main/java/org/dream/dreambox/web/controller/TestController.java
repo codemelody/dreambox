@@ -3,7 +3,7 @@ package org.dream.dreambox.web.controller;
 import java.io.File;
 
 import org.dream.dreambox.common.base.BaseController;
-import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanDownload;
+import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanFileDownload;
 import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanFileInfo;
 import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanFileUpload;
 import org.dream.dreambox.common.component.pan.kuaipan.KuaiPanOAuth;
@@ -79,7 +79,7 @@ public class TestController extends BaseController {
         AccessTokenRes r = new AccessTokenRes();
         r.setOauthToken(token);
         r.setOauthTokenSecret(secret);
-        KuaiPanDownload service = new KuaiPanDownload();
+        KuaiPanFileDownload service = new KuaiPanFileDownload();
         service.downloadFile(r, "f:/test1.txt", "/test.txt");
         mav.addObject("token", r.getOauthToken());
         mav.addObject("secret", r.getOauthTokenSecret());

@@ -14,7 +14,7 @@ import org.dream.dreambox.common.util.ThreadSafeHttpClient;
 
 import sun.misc.BASE64Encoder;
 
-public class KuaiPanDownload {
+public class KuaiPanFileDownload {
 
     /**
      * 下载文件
