@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AccessTokenRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.AuthEntity;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadFileEntity;
+import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadFileRes;
 import org.dream.dreambox.common.component.pan.kuaipan.domain.UploadLocateRes;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanGlobal;
 import org.dream.dreambox.common.component.pan.kuaipan.util.KuaiPanUtil;
@@ -26,7 +27,7 @@ import sun.misc.BASE64Encoder;
 
 public class KuaiPanFileUpload {
 
-    public void uploadFile(File file, AccessTokenRes res, String uploadUrl) {
+    public UploadFileRes uploadFile(AccessTokenRes res, String uploadUrl, File file, String savePath) {
         try {
             UploadFileEntity upload = new UploadFileEntity();
             AuthEntity oauth = new AuthEntity();
@@ -40,7 +41,7 @@ public class KuaiPanFileUpload {
             upload.setAuth(oauth);
             upload.setOverwrite("True");
             upload.setRoot(KuaiPanGlobal.ROOT);
-            upload.setPath("%2Ftest.txt");
+            upload.setPath(KuaiPanUtil.encodeUrl(savePath));
 
             HttpClient client = ThreadSafeHttpClient.getInstance();
             String url = generateUploadFileRequestURL(upload, uploadUrl, res.getOauthTokenSecret());
@@ -53,14 +54,15 @@ public class KuaiPanFileUpload {
 
             post.setEntity(multipartEntity);
             post.addHeader("Content-Type",
-                "multipart/form-data; boundary=----------ThIs_Is_tHe_bouNdaRY_$");//������ʵ��Ϊ�˼��ϣ�boundary=----------ThIs_Is_tHe_bouNdaRY_$��MultipartEntity�Զ���ɵı?ֻ��ǰ�벿�֣�û�к����������һֱ˵���Ҳ���boundary....
+                "multipart/form-data; boundary=----------ThIs_Is_tHe_bouNdaRY_$");
             HttpResponse httpResponse = client.execute(post);
             System.out.println(httpResponse.getStatusLine().getStatusCode());
             HttpEntity resEntity = httpResponse.getEntity();
-            System.out.println((resEntity == null) ? "" : EntityUtils.toString(resEntity, HTTP.UTF_8));
-            
+            String json = (resEntity == null) ? "" : EntityUtils.toString(resEntity, HTTP.UTF_8);
+            return JsonUtil.parseJson2Object(json, UploadFileRes.class);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

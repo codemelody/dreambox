@@ -21,4 +21,6 @@ public class KuaiPanGlobal {
     
     public static final String METADATA_URL = "http://openapi.kuaipan.cn/1/metadata/";
     
+    public static final String DOWNLOAD_FILE_URL = "http://api-content.dfs.kuaipan.cn/1/fileops/download_file";
+    
 }

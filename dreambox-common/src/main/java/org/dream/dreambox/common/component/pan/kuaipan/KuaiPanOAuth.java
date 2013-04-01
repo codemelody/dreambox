@@ -24,7 +24,7 @@ public class KuaiPanOAuth {
      * @param oauth
      * @return
      */
-    private static String generateRequestUrl(AuthEntity oauth){
+    private String generateRequestUrl(AuthEntity oauth){
         if(StringUtils.isEmpty(oauth.getConsumerKey()) || oauth.getTimestamp() == null 
                 || oauth.getTimestamp() == 0 || StringUtils.isEmpty(oauth.getNonce())){
             throw new RuntimeException("参数异常[consumerKey=" + oauth.getConsumerKey() 
@@ -48,7 +48,7 @@ public class KuaiPanOAuth {
      * @param oauth
      * @return
      */
-    private static String generateRequestTokenSignature(AuthEntity oauth) {
+    private String generateRequestTokenSignature(AuthEntity oauth) {
         String baseUrl = generateRequestTokenBaseUrl(oauth);
         String secret = KuaiPanGlobal.CONSUMER_SECRET + "&";
         String base64 = new BASE64Encoder().encode(
@@ -61,7 +61,7 @@ public class KuaiPanOAuth {
      * @param oauth
      * @return
      */
-    private static String generateRequestTokenBaseUrl(AuthEntity oauth){
+    private String generateRequestTokenBaseUrl(AuthEntity oauth){
         if(StringUtils.isEmpty(oauth.getConsumerKey()) || oauth.getTimestamp() == null 
                 || oauth.getTimestamp() == 0 || StringUtils.isEmpty(oauth.getNonce())){
             throw new RuntimeException("参数异常[consumerKey=" + oauth.getConsumerKey() 
@@ -84,7 +84,7 @@ public class KuaiPanOAuth {
      * 获取未授权的临时 token。
      * @return
      */
-    public static RequestTokenRes requestToken(){
+    public RequestTokenRes requestToken(){
         try {
             AuthEntity oauth = new AuthEntity();
             oauth.setConsumerKey(KuaiPanGlobal.CONSUMER_KEY);
@@ -104,7 +104,7 @@ public class KuaiPanOAuth {
         }
     }
     
-    public static String authorize(RequestTokenRes param){
+    public String authorize(RequestTokenRes param){
         try {
             System.out.println(KuaiPanGlobal.AUTHORIZE_URL + param.getOauthToken());
             String res = ThreadSafeHttpClient.get(KuaiPanGlobal.AUTHORIZE_URL + param.getOauthToken());

@@ -32,5 +32,12 @@ Option 4: metadata<br/>
 	<input type="submit" value="确定" />
 </form>
 
+Option 4: download<br/>
+<form action="download.do" method="post">
+	<input type="hidden" value="${token!}" name="token" />
+	<input type="hidden" value="${secret!}" name="secret" />
+	<input type="submit" value="下载" />
+</form>
+
 </body>
 </html>
